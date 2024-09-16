@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Black.ttf);
+        font-weight: 900;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-BlackItalic.ttf);
+        font-weight: 900;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Bold.ttf);
+        font-weight: bold;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-BoldItalic.ttf);
+        font-weight: bold;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-ExtraBold.ttf);
+        font-weight: 800;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-ExtraBoldItalic.ttf);
+        font-weight: 900;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Italic.ttf);
+        font-weight: 100;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Light.ttf);
+        font-weight: 200;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-LightItalic.ttf);
+        font-weight: 200;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Medium.ttf);
+        font-weight: 300;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-MediumItalic.ttf);
+        font-weight: 300;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Regular.ttf);
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Regular.ttf);
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-SemiBold.ttf);
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: Poppins;
+        src: url(fonts/Poppins-Thin.ttf);
+        font-weight: 100;
+      }
+
+      * {
+        font-family: Poppins;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #010718;
+        color: #fff;
+        font-size: 50px;
+      }
+      @media (max-width: 1100px) {
+        .flex {
+          white-space: break-spaces;
+        }
+      }
+      .center span {
+        color: #4070f4;
+        margin-left: 5px;
+        position: relative;
+      }
+      .center span:after {
+        content: "";
+        position: absolute;
+        right: -10px;
+        height: 110%;
+        width: 3px;
+        background-color: #4070f4;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <div class="flex">
+        I'm Mo3bassia, I am
+        <span></span>
+      </div>
+    </div>
+
+    <div id="tryEl"></div>
+    <script>
+      let words = ["Front End Web Developer", "Electrical Engineer", "Student"];
+
+      let center = document.querySelector(".center");
+      let span = center.querySelector("span");
+
+      Array.prototype.typeWriter = function (element) {
+        let currentIndex = 0;
+        let currentWord = 0;
+        let that = this;
+        function interv() {
+          let postChar = setInterval(function () {
+            element.textContent += that[currentWord][currentIndex];
+            currentIndex++;
+            if (that[currentWord].length == currentIndex) {
+              clearInterval(postChar);
+              setTimeout(function () {
+                let removeChar = setInterval(function () {
+                  currentIndex--;
+                  element.textContent = element.textContent.substring(
+                    0,
+                    currentIndex
+                  );
+                  if (currentIndex == 0) {
+                    clearInterval(removeChar);
+                    currentWord++;
+                    if (currentWord != that.length) {
+                      interv();
+                    } else {
+                      setTimeout(function () {
+                        currentWord = 0;
+                        interv();
+                      }, 1000);
+                    }
+                  }
+                }, 100);
+              }, 500);
+            }
+          }, 100);
+        }
+        interv();
+      };
+
+      [
+        "Front End Web Developer",
+        "Electrical Engineer",
+        "Engineering Student",
+      ].typeWriter(span);
+
+      function interv() {
+        let postChar = setInterval(function () {
+          span.textContent += words[currentWord][currentIndex];
+          currentIndex++;
+          if (words[currentWord].length == currentIndex) {
+            clearInterval(postChar);
+            setTimeout(function () {
+              let removeChar = setInterval(function () {
+                currentIndex--;
+                span.textContent = span.textContent.substring(0, currentIndex);
+                if (currentIndex == 0) {
+                  clearInterval(removeChar);
+                  currentWord++;
+                  if (currentWord != words.length) {
+                    interv();
+                  } else {
+                    setTimeout(function () {
+                      currentWord = 0;
+                      interv();
+                    }, 1000);
+                  }
+                }
+              }, 100);
+            }, 500);
+          }
+        }, 100);
+      }
+
+      // interv();
+    </script>
+  </body>
+</html>
